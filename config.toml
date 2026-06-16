@@ -1,0 +1,63 @@
+# =============================================================================
+#  Konfiguracja eksperymentu FFP (problem strazacki) + algorytm genetyczny
+#  Edytuj tu wszystkie parametry - nie trzeba dotykac kodu.
+# =============================================================================
+
+[dataset]
+# Folder zawierajacy podkatalogi "2-obj/" oraz "3-obj/".
+# W repo jest maly podzbior instancji (instances/). Aby uzyc PELNEGO zbioru
+# K. Michalaka, rozpakuj ed-ls_ffp_instances i wskaz tu sciezke, np.:
+#   root = "/sciezka/do/ed-ls_ffp_instances"
+root = "instances"
+
+# Liczba kryteriow w zbiorze instancji: 2 lub 3.
+# UWAGA: problem jest JEDNOKRYTERIALNY - zawsze bierzemy 1. (lewa) kolumne kosztow.
+n_obj = 2
+
+[experiment]
+# Ktore warianty uruchomic. Dostepne:
+#   "baseline"  - czysty GA (bez wiedzy o problemie)
+#   "cost"      - usprawnienie 1: chron najdrozsze wezly
+#   "degree"    - usprawnienie 2: chron wezly o najwiekszej liczbie polaczen
+#   "dijkstra"  - usprawnienie 3: chron wezly najblizsze ogniu (odetnij dostep)
+#   "hybrid"    - pomysl wlasny: wazona kombinacja powyzszych
+strategies = ["baseline", "cost", "degree", "dijkstra", "hybrid"]
+
+runs = 10          # liczba niezaleznych powtorzen kazdego wariantu (statystyka)
+base_seed = 42     # ziarno bazowe (powtarzalnosc); run i uzywa seed = base_seed + i
+results_dir = "results"
+
+# -----------------------------------------------------------------------------
+# Instancje do uruchomienia. Dodawaj kolejne bloki [[instances]].
+# size = liczba wezlow (50, 75, 100, 125, 150, 175, 200, 225, 250)
+# idx  = numer instancji (1..30 dla 2-obj)
+# -----------------------------------------------------------------------------
+[[instances]]
+size = 50
+idx = 1
+
+[[instances]]
+size = 100
+idx = 1
+
+[ga]
+# --- Parametry, ktore wyznaczaja BUDZET = pop_size * generations ---
+# Ten sam budzet obowiazuje KAZDY wariant (kod to sprawdza i przerywa, gdy sie rozjedzie).
+pop_size = 100
+generations = 100
+
+# --- Operatory genetyczne ---
+crossover_prob = 0.9          # prawdopodobienstwo krzyzowania
+mutation_prob = 0.2           # prawdopodobienstwo mutacji
+tournament_size = 5           # rozmiar turnieju w selekcji
+elite_size = 2                # liczba osobnikow elitarnych
+crossover = "ordered"         # "ordered" | "pmx" | "both"
+mutation = "swap"             # "swap" | "inversion" | "both"
+
+# --- Parametry FFP ---
+num_firefighters = 2          # ilu strazakow rozmieszczamy w kazdej turze
+
+# --- Parametry usprawnien (ignorowane przez baseline) ---
+seed_fraction = 0.25          # jaka czesc populacji poczatkowej zasiac heurystyka
+guided_mutation_prob = 0.5    # p. ze mutacja bedzie kierowana heurystyka
+hybrid_weights = [1.0, 1.0, 1.0]   # wagi hybrydy: [koszt, stopien, bliskosc ognia]
