@@ -1,0 +1,305 @@
+======================================================================
+  Instancja : 2obj_0250_04
+  Wezly     : 250   Krawedzie : 600   Start pozaru : [173]
+  Koszt calk.: 8241.6   Strazacy/ture : 2
+  Budzet    : 10000 ewaluacji/run (pop=50 x gen=200)   Powtorzen : 10
+======================================================================
+  baseline:
+    run  1/10: best=    902.8  avg=    855.9  worst=    704.6
+    run  2/10: best=    852.2  avg=    840.1  worst=    722.2
+    run  3/10: best=    896.4  avg=    881.4  worst=    717.2
+    run  4/10: best=    891.5  avg=    873.8  worst=    655.4
+    run  5/10: best=    890.7  avg=    877.7  worst=    826.7
+    run  6/10: best=    838.8  avg=    823.4  worst=    726.6
+    run  7/10: best=    770.3  avg=    761.2  worst=    691.1
+    run  8/10: best=    952.2  avg=    908.4  worst=    566.7
+    run  9/10: best=    848.4  avg=    823.7  worst=    671.8
+    run 10/10: best=    888.4  avg=    862.8  worst=    757.4
+    baseline : best=    952.2  avg=    908.4  worst=    566.7  std=  88.51  evals/run=10000
+  cost:
+    run  1/10: best=   1036.0  avg=   1014.2  worst=    924.3
+    run  2/10: best=   1063.7  avg=   1052.2  worst=    920.0
+    run  3/10: best=    974.4  avg=    969.9  worst=    893.4
+    run  4/10: best=   1025.0  avg=   1002.7  worst=    904.6
+    run  5/10: best=   1037.8  avg=   1033.5  worst=    954.5
+    run  6/10: best=   1057.2  avg=   1049.4  worst=    983.1
+    run  7/10: best=   1016.8  avg=   1009.8  worst=    990.1
+    run  8/10: best=   1094.9  avg=   1079.3  worst=    920.4
+    run  9/10: best=   1120.2  avg=   1100.9  worst=    934.9
+    run 10/10: best=   1030.2  avg=    998.2  worst=    756.7
+    cost     : best=   1120.2  avg=   1100.9  worst=    934.9  std=  43.53  evals/run=10000
+  degree:
+    run  1/10: best=    896.4  avg=    885.0  worst=    624.4
+    run  2/10: best=   1032.5  avg=   1026.9  worst=    916.5
+    run  3/10: best=    905.2  avg=    875.4  worst=    653.1
+    run  4/10: best=    927.5  avg=    871.1  worst=    695.0
+    run  5/10: best=    860.3  avg=    828.5  worst=    625.5
+    run  6/10: best=    877.6  avg=    869.3  worst=    794.2
+    run  7/10: best=    927.5  avg=    885.0  worst=    703.0
+    run  8/10: best=   1026.8  avg=    979.3  worst=    756.9
+    run  9/10: best=    942.9  avg=    920.9  worst=    743.8
+    run 10/10: best=    967.1  avg=    893.8  worst=    705.4
+    degree   : best=   1032.5  avg=   1026.9  worst=    916.5  std=  22.84  evals/run=10000
+  dijkstra:
+    run  1/10: best=   8176.5  avg=   5275.2  worst=    362.1
+    run  2/10: best=   8176.5  avg=   6043.8  worst=    523.7
+    run  3/10: best=   8176.5  avg=   5878.6  worst=    384.2
+    run  4/10: best=   8176.5  avg=   3591.5  worst=    333.8
+    run  5/10: best=   8176.5  avg=   5112.2  worst=    440.7
+    run  6/10: best=   8176.5  avg=   4957.1  worst=    399.3
+    run  7/10: best=   8176.5  avg=   4953.9  worst=    299.8
+    run  8/10: best=   8176.5  avg=   5131.9  worst=    312.4
+    run  9/10: best=   8176.5  avg=   6323.0  worst=    399.6
+    run 10/10: best=   8176.5  avg=   4819.9  worst=    498.3
+    dijkstra : best=   8176.5  avg=   6323.0  worst=    399.6  std=3298.43  evals/run=10000
+  hybrid:
+    run  1/10: best=    999.6  avg=    992.3  worst=    883.1
+    run  2/10: best=   1092.5  avg=   1079.5  worst=    923.2
+    run  3/10: best=   1029.4  avg=   1024.5  worst=    830.5
+    run  4/10: best=   1028.0  avg=   1008.7  worst=    833.2
+    run  5/10: best=   1036.9  avg=   1021.0  worst=    945.7
+    run  6/10: best=   1024.7  avg=   1013.0  worst=    862.8
+    run  7/10: best=   1013.0  avg=   1006.2  worst=    901.6
+    run  8/10: best=   1025.7  avg=   1014.9  worst=    882.6
+    run  9/10: best=   1006.9  avg=   1003.6  worst=    936.4
+    run 10/10: best=   1023.0  avg=    960.4  worst=    794.6
+    hybrid   : best=   1092.5  avg=   1079.5  worst=    923.2  std=  32.76  evals/run=10000
+
+======================================================================
+  baseline : best=    952.2  avg=    908.4  worst=    566.7  std=  88.51  evals/run=10000
+  cost     : best=   1120.2  avg=   1100.9  worst=    934.9  std=  43.53  evals/run=10000
+  degree   : best=   1032.5  avg=   1026.9  worst=    916.5  std=  22.84  evals/run=10000
+  dijkstra : best=   8176.5  avg=   6323.0  worst=    399.6  std=3298.43  evals/run=10000
+  hybrid   : best=   1092.5  avg=   1079.5  worst=    923.2  std=  32.76  evals/run=10000
+  [OK] Rowny budzet dla wszystkich wariantow: 10000 ewaluacji/run.
+
+======================================================================
+  Instancja : 2obj_0250_11
+  Wezly     : 250   Krawedzie : 657   Start pozaru : [203]
+  Koszt calk.: 7714.4   Strazacy/ture : 2
+  Budzet    : 10000 ewaluacji/run (pop=50 x gen=200)   Powtorzen : 10
+======================================================================
+  baseline:
+    run  1/10: best=    923.4  avg=    881.7  worst=    696.8
+    run  2/10: best=    955.6  avg=    924.2  worst=    732.2
+    run  3/10: best=    957.2  avg=    931.3  worst=    611.6
+    run  4/10: best=    966.6  avg=    950.9  worst=    834.0
+    run  5/10: best=    926.7  avg=    904.3  worst=    763.9
+    run  6/10: best=    988.1  avg=    973.7  worst=    919.2
+    run  7/10: best=    926.8  avg=    916.1  worst=    825.9
+    run  8/10: best=    947.9  avg=    925.5  worst=    813.1
+    run  9/10: best=   1004.3  avg=    966.1  worst=    780.2
+    run 10/10: best=   1019.5  avg=    987.5  worst=    802.1
+    baseline : best=   1019.5  avg=    987.5  worst=    802.1  std=  56.89  evals/run=10000
+  cost:
+    run  1/10: best=   1099.3  avg=   1054.7  worst=    966.2
+    run  2/10: best=   1099.3  avg=   1064.9  worst=    908.6
+    run  3/10: best=   1099.3  avg=   1037.3  worst=    882.1
+    run  4/10: best=   1099.3  avg=   1013.6  worst=    819.9
+    run  5/10: best=   1099.3  avg=   1060.0  worst=    927.6
+    run  6/10: best=   1099.3  avg=   1064.7  worst=    945.0
+    run  7/10: best=   1099.3  avg=   1069.7  worst=    877.2
+    run  8/10: best=   1099.3  avg=   1036.4  worst=    828.3
+    run  9/10: best=   1099.3  avg=   1071.2  worst=    959.6
+    run 10/10: best=   1099.3  avg=   1036.2  worst=    797.2
+    cost     : best=   1099.3  avg=   1071.2  worst=    959.6  std=  43.48  evals/run=10000
+  degree:
+    run  1/10: best=   1012.1  avg=    990.6  worst=    940.8
+    run  2/10: best=   1045.7  avg=   1032.7  worst=    957.0
+    run  3/10: best=    989.0  avg=    983.8  worst=    951.8
+    run  4/10: best=   1055.1  avg=   1046.8  worst=    927.2
+    run  5/10: best=   1048.8  avg=   1036.0  worst=    911.3
+    run  6/10: best=    991.0  avg=    965.3  worst=    745.6
+    run  7/10: best=    959.4  avg=    949.1  worst=    823.5
+    run  8/10: best=    997.9  avg=    974.5  worst=    816.2
+    run  9/10: best=    977.1  avg=    952.1  worst=    824.4
+    run 10/10: best=    898.0  avg=    884.9  worst=    814.4
+    degree   : best=   1055.1  avg=   1046.8  worst=    927.2  std=  23.46  evals/run=10000
+  dijkstra:
+    run  1/10: best=    971.4  avg=    954.3  worst=    832.5
+    run  2/10: best=    943.9  avg=    934.8  worst=    881.4
+    run  3/10: best=   1017.0  avg=   1012.0  worst=    970.3
+    run  4/10: best=    965.6  avg=    957.1  worst=    881.9
+    run  5/10: best=   1007.3  avg=    960.8  worst=    832.3
+    run  6/10: best=    978.8  avg=    959.1  worst=    840.9
+    run  7/10: best=    909.4  avg=    892.9  worst=    799.4
+    run  8/10: best=    971.5  avg=    951.7  worst=    849.7
+    run  9/10: best=    959.2  avg=    909.1  worst=    691.3
+    run 10/10: best=    881.5  avg=    864.2  worst=    800.4
+    dijkstra : best=   1017.0  avg=   1012.0  worst=    970.3  std=   9.95  evals/run=10000
+  hybrid:
+    run  1/10: best=   1079.4  avg=   1049.5  worst=    888.5
+    run  2/10: best=   1099.7  avg=   1099.7  worst=   1099.7
+    run  3/10: best=   1092.3  avg=   1084.5  worst=    963.0
+    run  4/10: best=   1097.8  avg=   1093.4  worst=   1047.0
+    run  5/10: best=   1104.5  avg=   1088.9  worst=    991.4
+    run  6/10: best=   1095.0  avg=   1085.7  worst=    993.7
+    run  7/10: best=   1101.8  avg=   1091.8  worst=   1025.6
+    run  8/10: best=   1094.9  avg=   1085.1  worst=   1029.3
+    run  9/10: best=   1076.1  avg=   1067.9  worst=    940.4
+    run 10/10: best=   1099.3  avg=   1091.3  worst=   1026.3
+    hybrid   : best=   1099.7  avg=   1099.7  worst=   1099.7  std=   0.00  evals/run=10000
+
+======================================================================
+  baseline : best=   1019.5  avg=    987.5  worst=    802.1  std=  56.89  evals/run=10000
+  cost     : best=   1099.3  avg=   1071.2  worst=    959.6  std=  43.48  evals/run=10000
+  degree   : best=   1055.1  avg=   1046.8  worst=    927.2  std=  23.46  evals/run=10000
+  dijkstra : best=   1017.0  avg=   1012.0  worst=    970.3  std=   9.95  evals/run=10000
+  hybrid   : best=   1099.7  avg=   1099.7  worst=   1099.7  std=   0.00  evals/run=10000
+  [OK] Rowny budzet dla wszystkich wariantow: 10000 ewaluacji/run.
+
+======================================================================
+  Instancja : 2obj_0250_19
+  Wezly     : 250   Krawedzie : 633   Start pozaru : [10]
+  Koszt calk.: 8126.8   Strazacy/ture : 2
+  Budzet    : 10000 ewaluacji/run (pop=50 x gen=200)   Powtorzen : 10
+======================================================================
+  baseline:
+    run  1/10: best=    839.3  avg=    783.2  worst=    544.4
+    run  2/10: best=    934.8  avg=    817.2  worst=    522.2
+    run  3/10: best=    957.6  avg=    937.2  worst=    794.8
+    run  4/10: best=    916.6  avg=    866.8  worst=    498.1
+    run  5/10: best=    936.7  avg=    904.2  worst=    746.5
+    run  6/10: best=    777.8  avg=    753.4  worst=    595.3
+    run  7/10: best=    958.6  avg=    946.6  worst=    847.0
+    run  8/10: best=    873.8  avg=    796.6  worst=    618.6
+    run  9/10: best=    793.6  avg=    728.0  worst=    522.4
+    run 10/10: best=    913.6  avg=    901.2  worst=    831.3
+    baseline : best=    958.6  avg=    946.6  worst=    847.0  std=  32.61  evals/run=10000
+  cost:
+    run  1/10: best=   1028.1  avg=   1012.0  worst=    795.8
+    run  2/10: best=    985.6  avg=    983.5  worst=    951.4
+    run  3/10: best=    966.4  avg=    965.7  worst=    951.2
+    run  4/10: best=   1003.8  avg=    985.8  worst=    850.7
+    run  5/10: best=    998.3  avg=    987.9  worst=    882.4
+    run  6/10: best=   1001.7  avg=    988.0  worst=    912.2
+    run  7/10: best=   1012.6  avg=    999.7  worst=    807.3
+    run  8/10: best=   1033.5  avg=   1025.2  worst=    920.5
+    run  9/10: best=   1038.9  avg=   1030.9  worst=    948.7
+    run 10/10: best=    997.2  avg=    987.5  worst=    869.0
+    cost     : best=   1038.9  avg=   1030.9  worst=    948.7  std=  18.34  evals/run=10000
+  degree:
+    run  1/10: best=    852.4  avg=    829.5  worst=    632.8
+    run  2/10: best=    915.1  avg=    885.0  worst=    655.6
+    run  3/10: best=    887.3  avg=    865.9  worst=    743.6
+    run  4/10: best=    959.7  avg=    940.2  worst=    769.4
+    run  5/10: best=    913.5  avg=    886.3  worst=    769.2
+    run  6/10: best=    911.4  avg=    864.9  worst=    644.7
+    run  7/10: best=    825.7  avg=    749.8  worst=    494.9
+    run  8/10: best=    815.5  avg=    793.7  worst=    386.9
+    run  9/10: best=    820.9  avg=    806.7  worst=    708.7
+    run 10/10: best=    910.9  avg=    889.1  worst=    731.1
+    degree   : best=    959.7  avg=    940.2  worst=    769.4  std=  52.55  evals/run=10000
+  dijkstra:
+    run  1/10: best=    866.3  avg=    848.7  worst=    676.9
+    run  2/10: best=    823.7  avg=    800.6  worst=    607.3
+    run  3/10: best=    958.5  avg=    911.7  worst=    562.6
+    run  4/10: best=    965.2  avg=    949.1  worst=    831.0
+    run  5/10: best=    965.7  avg=    935.4  worst=    750.8
+    run  6/10: best=    964.9  avg=    913.7  worst=    778.7
+    run  7/10: best=    943.1  avg=    920.8  worst=    764.0
+    run  8/10: best=    901.9  avg=    795.7  worst=    480.5
+    run  9/10: best=    861.2  avg=    778.6  worst=    434.9
+    run 10/10: best=    737.2  avg=    692.6  worst=    469.7
+    dijkstra : best=    965.2  avg=    949.1  worst=    831.0  std=  43.61  evals/run=10000
+  hybrid:
+    run  1/10: best=    993.5  avg=    957.5  worst=    818.6
+    run  2/10: best=    984.6  avg=    948.4  worst=    783.7
+    run  3/10: best=   1048.6  avg=   1045.3  worst=   1007.5
+    run  4/10: best=    983.3  avg=    934.9  worst=    717.0
+    run  5/10: best=   1087.6  avg=   1078.8  worst=    951.2
+    run  6/10: best=    984.6  avg=    965.7  worst=    863.1
+    run  7/10: best=   1026.2  avg=   1004.3  worst=    775.2
+    run  8/10: best=    984.6  avg=    947.1  worst=    815.6
+    run  9/10: best=    983.3  avg=    966.0  worst=    829.9
+    run 10/10: best=    992.8  avg=    949.9  worst=    811.8
+    hybrid   : best=   1087.6  avg=   1078.8  worst=    951.2  std=  27.81  evals/run=10000
+
+======================================================================
+  baseline : best=    958.6  avg=    946.6  worst=    847.0  std=  32.61  evals/run=10000
+  cost     : best=   1038.9  avg=   1030.9  worst=    948.7  std=  18.34  evals/run=10000
+  degree   : best=    959.7  avg=    940.2  worst=    769.4  std=  52.55  evals/run=10000
+  dijkstra : best=    965.2  avg=    949.1  worst=    831.0  std=  43.61  evals/run=10000
+  hybrid   : best=   1087.6  avg=   1078.8  worst=    951.2  std=  27.81  evals/run=10000
+  [OK] Rowny budzet dla wszystkich wariantow: 10000 ewaluacji/run.
+
+======================================================================
+  Instancja : 2obj_0250_30
+  Wezly     : 250   Krawedzie : 653   Start pozaru : [132]
+  Koszt calk.: 8167.8   Strazacy/ture : 2
+  Budzet    : 10000 ewaluacji/run (pop=50 x gen=200)   Powtorzen : 10
+======================================================================
+  baseline:
+    run  1/10: best=    823.6  avg=    771.3  worst=    401.5
+    run  2/10: best=    799.1  avg=    760.3  worst=    564.8
+    run  3/10: best=    764.1  avg=    681.2  worst=    466.8
+    run  4/10: best=    811.4  avg=    796.2  worst=    537.3
+    run  5/10: best=    761.5  avg=    735.9  worst=    604.1
+    run  6/10: best=    782.4  avg=    751.8  worst=    603.2
+    run  7/10: best=    748.7  avg=    724.9  worst=    514.7
+    run  8/10: best=    762.3  avg=    749.1  worst=    695.5
+    run  9/10: best=    786.5  avg=    752.1  worst=    596.2
+    run 10/10: best=    772.4  avg=    760.2  worst=    623.4
+    baseline : best=    811.4  avg=    796.2  worst=    537.3  std=  47.52  evals/run=10000
+  cost:
+    run  1/10: best=    858.1  avg=    856.2  worst=    820.3
+    run  2/10: best=    852.5  avg=    848.8  worst=    761.9
+    run  3/10: best=    878.1  avg=    877.2  worst=    863.8
+    run  4/10: best=    856.7  avg=    849.8  worst=    786.3
+    run  5/10: best=    869.9  avg=    851.2  worst=    707.1
+    run  6/10: best=    858.1  avg=    840.2  worst=    744.1
+    run  7/10: best=    844.4  avg=    838.9  worst=    786.6
+    run  8/10: best=    868.3  avg=    848.2  worst=    792.4
+    run  9/10: best=    855.7  avg=    845.3  worst=    753.5
+    run 10/10: best=    868.2  avg=    853.1  worst=    760.3
+    cost     : best=    878.1  avg=    877.2  worst=    863.8  std=   3.40  evals/run=10000
+  degree:
+    run  1/10: best=    827.7  avg=    798.9  worst=    622.9
+    run  2/10: best=    723.7  avg=    695.9  worst=    444.4
+    run  3/10: best=    860.3  avg=    826.9  worst=    628.0
+    run  4/10: best=    888.5  avg=    742.9  worst=    485.8
+    run  5/10: best=    803.2  avg=    784.8  worst=    670.0
+    run  6/10: best=    833.7  avg=    801.8  worst=    697.1
+    run  7/10: best=    756.1  avg=    730.8  worst=    656.3
+    run  8/10: best=    880.2  avg=    776.8  worst=    565.1
+    run  9/10: best=    870.7  avg=    820.2  worst=    560.3
+    run 10/10: best=    808.7  avg=    768.7  worst=    622.9
+    degree   : best=    860.3  avg=    826.9  worst=    628.0  std=  76.90  evals/run=10000
+  dijkstra:
+    run  1/10: best=    833.7  avg=    779.5  worst=    549.3
+    run  2/10: best=    810.9  avg=    776.0  worst=    494.9
+    run  3/10: best=    787.7  avg=    778.6  worst=    568.5
+    run  4/10: best=    815.5  avg=    783.3  worst=    597.1
+    run  5/10: best=    828.0  avg=    811.7  worst=    535.3
+    run  6/10: best=    819.2  avg=    758.1  worst=    431.6
+    run  7/10: best=    833.2  avg=    827.2  worst=    679.7
+    run  8/10: best=    755.5  avg=    732.9  worst=    638.0
+    run  9/10: best=    740.7  avg=    713.8  worst=    538.6
+    run 10/10: best=    813.4  avg=    800.2  worst=    653.6
+    dijkstra : best=    833.2  avg=    827.2  worst=    679.7  std=  24.48  evals/run=10000
+  hybrid:
+    run  1/10: best=    865.6  avg=    829.6  worst=    710.5
+    run  2/10: best=    865.7  avg=    860.6  worst=    778.1
+    run  3/10: best=    945.5  avg=    924.8  worst=    710.2
+    run  4/10: best=    862.8  avg=    855.7  worst=    711.6
+    run  5/10: best=    954.0  avg=    938.0  worst=    847.6
+    run  6/10: best=    946.3  avg=    919.1  worst=    687.2
+    run  7/10: best=    861.3  avg=    848.6  worst=    726.6
+    run  8/10: best=    873.4  avg=    856.4  worst=    696.7
+    run  9/10: best=    863.3  avg=    833.3  worst=    726.4
+    run 10/10: best=    869.1  avg=    858.4  worst=    772.2
+    hybrid   : best=    954.0  avg=    938.0  worst=    847.6  std=  28.62  evals/run=10000
+
+======================================================================
+  baseline : best=    811.4  avg=    796.2  worst=    537.3  std=  47.52  evals/run=10000
+  cost     : best=    878.1  avg=    877.2  worst=    863.8  std=   3.40  evals/run=10000
+  degree   : best=    860.3  avg=    826.9  worst=    628.0  std=  76.90  evals/run=10000
+  dijkstra : best=    833.2  avg=    827.2  worst=    679.7  std=  24.48  evals/run=10000
+  hybrid   : best=    954.0  avg=    938.0  worst=    847.6  std=  28.62  evals/run=10000
+  [OK] Rowny budzet dla wszystkich wariantow: 10000 ewaluacji/run.
+
+======================================================================
+  GOTOWE.
+  Podsumowanie CSV : results/run_20260621_190129/summary.csv
+  Wykresy (33) zapisane w: results/run_20260621_190129
+======================================================================
