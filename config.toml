@@ -22,6 +22,7 @@ n_obj = 2
 #   "dijkstra"  - usprawnienie 3: chron wezly najblizsze ogniu (odetnij dostep)
 #   "hybrid"    - pomysl wlasny: wazona kombinacja powyzszych
 strategies = ["baseline", "cost", "degree", "dijkstra", "hybrid"]
+# strategies = ["baseline"]
 
 runs = 10          # liczba niezaleznych powtorzen kazdego wariantu (statystyka)
 base_seed = 42     # ziarno bazowe (powtarzalnosc); run i uzywa seed = base_seed + i
@@ -32,25 +33,66 @@ results_dir = "results"
 # size = liczba wezlow (50, 75, 100, 125, 150, 175, 200, 225, 250)
 # idx  = numer instancji (1..30 dla 2-obj)
 # -----------------------------------------------------------------------------
-[[instances]]
-size = 50
-idx = 1
+# [[instances]]
+# size = 50
+# idx = 4
+
+# [[instances]]
+# size = 50
+# idx = 9
+
+# [[instances]]
+# size = 50
+# idx = 18
+
+# [[instances]]
+# size = 50
+# idx = 25
+
+# [[instances]]
+# size = 125
+# idx = 3
+
+# [[instances]]
+# size = 125
+# idx = 6
+
+# [[instances]]
+# size = 125
+# idx = 22
+
+# [[instances]]
+# size = 125
+# idx = 25
+
 
 [[instances]]
-size = 100
-idx = 1
+size = 250
+idx = 4
+
+[[instances]]
+size = 250
+idx = 11
+
+[[instances]]
+size = 250
+idx = 19
+
+[[instances]]
+size = 250
+idx = 30
 
 [ga]
 # --- Parametry, ktore wyznaczaja BUDZET = pop_size * generations ---
 # Ten sam budzet obowiazuje KAZDY wariant (kod to sprawdza i przerywa, gdy sie rozjedzie).
-pop_size = 100
-generations = 100
+pop_size = 50
+generations = 200
 
 # --- Operatory genetyczne ---
-crossover_prob = 0.9          # prawdopodobienstwo krzyzowania
-mutation_prob = 0.2           # prawdopodobienstwo mutacji
-tournament_size = 5           # rozmiar turnieju w selekcji
-elite_size = 2                # liczba osobnikow elitarnych
+crossover_prob = 0.7        # prawdopodobienstwo krzyzowania
+mutation_prob = 0.1         # prawdopodobienstwo mutacji
+tournament_size = 5         # rozmiar turnieju w selekcji
+elite_size = 2               # liczba osobnikow elitarnych
 crossover = "ordered"         # "ordered" | "pmx" | "both"
 mutation = "swap"             # "swap" | "inversion" | "both"
 
