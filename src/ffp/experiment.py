@@ -35,6 +35,21 @@ class StrategyStats:
     gen_avg: list[float]
     gen_worst: list[float]
     final_bests: list[float]   # najlepszy wynik kazdego powtorzenia (do boxplotu)
+    best_permutation: list[int]   # permutacja runu zwyciezcy (best avg)
+
+
+def _format_permutation(perm: list[int], start_nodes: set[int], burned_nodes: set[int]) -> str:
+    """Permutacja runu zwyciezcy; (O-start) = pierwotny wybuch pozaru,
+    (O) = wezel, na ktory pozar sie rozprzestrzenil, strazak bez znacznika."""
+    parts = []
+    for node in perm:
+        if node in start_nodes:
+            parts.append(f"{node}(O-start)")
+        elif node in burned_nodes:
+            parts.append(f"{node}(O)")
+        else:
+            parts.append(str(node))
+    return "[" + ", ".join(parts) + "]"
 
 
 def run_strategy(instance: FFPInstance, config: GAConfig, strategy: str, runs: int, base_seed: int) -> StrategyStats:
@@ -65,6 +80,7 @@ def run_strategy(instance: FFPInstance, config: GAConfig, strategy: str, runs: i
         gen_avg=winner.gen_avg,
         gen_worst=winner.gen_worst,
         final_bests=finals,
+        best_permutation=winner.best_permutation,
     )
 
 
@@ -113,11 +129,15 @@ def run_instance(
         print(f"    {strat:9s}: best={s.best:9.1f}  avg={s.avg:9.1f}  "
               f"worst={s.worst:9.1f}  std={s.std:7.2f}  evals/run={s.evaluations_per_run}")
 
+    start_nodes = set(instance.start_nodes)
     print(f"\n{'='*70}")
     for strat in strategies:
         s = stats[strat]
+        sim = simulate(instance, s.best_permutation, config.num_firefighters)
+        burned_nodes = set(sim.burned_set) - start_nodes
         print(f"  {strat:9s}: best={s.best:9.1f}  avg={s.avg:9.1f}  "
               f"worst={s.worst:9.1f}  std={s.std:7.2f}  evals/run={s.evaluations_per_run}")
+        print(_format_permutation(s.best_permutation, start_nodes, burned_nodes))
 
     # --- KONTROLA BUDZETU: wszystkie warianty musza miec identyczny budzet ---
     budgets = {strat: s.evaluations_per_run for strat, s in stats.items()}

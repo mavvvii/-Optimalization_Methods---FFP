@@ -25,6 +25,7 @@ class SimulationResult:
     saved_nodes: int           # liczba uratowanych wezlow
     burned_nodes: int          # liczba spalonych wezlow
     protected_order: tuple[int, ...]   # wezly faktycznie ochronione (w kolejnosci)
+    burned_set: frozenset[int]         # wezly spalone (start pozaru + rozprzestrzenienie)
 
 
 def simulate(instance: FFPInstance, priority: list[int], num_firefighters: int) -> SimulationResult:
@@ -77,4 +78,5 @@ def simulate(instance: FFPInstance, priority: list[int], num_firefighters: int) 
         saved_nodes=saved_nodes,
         burned_nodes=n - saved_nodes,
         protected_order=tuple(protected_seq),
+        burned_set=frozenset(i for i in range(n) if burning[i]),
     )
