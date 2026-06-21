@@ -1,0 +1,2 @@
+instance,num_nodes,strategy,best,avg,worst,std,improvement_vs_baseline_%,greedy_reference,budget,evaluations_per_run
+2obj_0050_01,50,baseline,631.0408,626.3380,473.0459,20.5246,0.00,,10000,10000

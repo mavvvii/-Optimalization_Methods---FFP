@@ -1,0 +1,73 @@
+INSTACJA 2-obj-0250_0002_28
+
+num_firefighters = 2 
+
+start point -> pop_size=100, gen=100, Px=0,7, Pm=0,1, Tour=5 elite_size=2 crossover=ordered mutation=swap BUDZET PER RUN 10k RUN=5 
+best=    791.0  avg=    756.2  worst=    553.1  std=  61.26
+
+POP_SIZE i GEN_SIZE
+1. pop_size=200, gen=50
+best=    821.8  avg=    770.0  worst=    567.2  std=  63.83
+2 pop_size=400, gen=25
+best=    730.3  avg=    681.1  worst=    529.0  std=  45.23
+3. pop_size=50, gen=200
+best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+4. pop_size=25, gen=400
+best=    791.3  avg=    773.5  worst=    674.3  std=  24.77
+
+WIN pop_size=50, gen=200 LOCK
+
+
+1. Px=0.9
+best=    810.1  avg=    770.3  worst=    631.6  std=  51.30
+2. Px=0.5
+best=    840.5  avg=    821.8  worst=    762.0  std=  24.37
+3. Px=0.3
+best=    810.0  avg=    799.4  worst=    689.8  std=  29.22
+
+WIN Px=0.7 LOCK
+best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+
+1. Pm=0.3
+best=    844.6  avg=    812.8  worst=    689.8  std=  48.42
+2. Pm=0.5
+best=    899.0  avg=    795.2  worst=    506.8  std= 109.43
+3. Pm=0.7
+best=    878.1  avg=    813.5  worst=    609.0  std=  76.61
+
+WIN Pm=0.1 LOCK
+best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+
+1. Tour=8
+best=    823.5  avg=    818.4  worst=    719.1  std=  17.55
+2. Tour=12
+best=    808.3  avg=    801.6  worst=    750.8  std=  18.15 
+3. Tour=16
+best=    798.2  avg=    793.1  worst=    679.3  std=  23.40
+
+WIN TOUR=5 LOCk
+best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+
+1.Elite size = 3
+best=    791.3  avg=    787.5  worst=    660.6  std=  20.04
+2.Elite size = 4
+best=    811.9  avg=    806.3  worst=    727.1  std=  17.25
+
+WIN ELITE SIZE=2 LOCk
+best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+
+ORDERED: best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+PMX:	 best=    818.9  avg=    818.9  worst=    818.9  std=   0.00
+
+WIN ORDERED LOCK
+best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+
+SWAP:	    best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+INVERSION:  best=    772.0  avg=    725.0  worst=    380.5  std= 106.64
+
+SWAP WIN LOCK
+best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+
+FINAL PARAMETERS: pop_size=50 gen=200 Px=0.7 Pm=0.1 Tour=5 Elite size=2 ORDERED SWAP
+best=    838.2  avg=    830.2  worst=    716.3  std=  25.44
+
