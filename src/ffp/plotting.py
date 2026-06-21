@@ -1,9 +1,12 @@
 """Wykresy generowane automatycznie z wynikow eksperymentu (matplotlib).
 
+Wszystkie statystyki/krzywe pochodza z runu zwyciezcy (tego z najlepszym avg
+koncowej populacji wsrod `runs` powtorzen) - patrz experiment.run_strategy.
+
 Dla kazdej instancji:
-  * krzywe zbieznosci (best uratowany koszt vs pokolenie) – wszystkie warianty,
+  * krzywe zbieznosci (best uratowany koszt vs pokolenie) – run zwyciezca, wszystkie warianty,
   * slupki koncowej jakosci (avg +/- std) z linia odniesienia heurystyki zachlannej,
-  * boxplot rozkladu najlepszych wynikow z powtorzen.
+  * boxplot rozkladu najlepszych wynikow z powtorzen (wszystkie runy, surowe dane).
 Zbiorczo:
   * procentowa poprawa wariantow wzgledem baseline, usredniona po instancjach.
 """
@@ -39,12 +42,34 @@ def plot_convergence(report: InstanceReport, out_dir: Path) -> Path:
         xs = range(1, len(st.gen_best) + 1)
         ax.plot(xs, st.gen_best, label=strat, color=_color(strat), linewidth=2)
     ax.set_xlabel("Pokolenie")
-    ax.set_ylabel("Najlepszy uratowany koszt (srednia z powtorzen)")
+    ax.set_ylabel("Uratowany koszt (best, run best avg)")
     ax.set_title(f"Zbieznosc GA – {report.instance.name}")
     ax.legend(title="Wariant")
     ax.grid(True, alpha=0.3)
     fig.tight_layout()
     path = out_dir / f"{report.instance.name}_convergence.png"
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+    return path
+
+
+def plot_strategy_curves(report: InstanceReport, strategy: str, out_dir: Path) -> Path:
+    """Osobny wykres dla jednego wariantu: krzywe best/avg/worst (run zwyciezca)."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    st = report.stats[strategy]
+    xs = range(1, len(st.gen_best) + 1)
+
+    fig, ax = plt.subplots(figsize=(9, 5.5))
+    ax.plot(xs, st.gen_best, label="best", color="#2ca02c", linewidth=2)
+    ax.plot(xs, st.gen_avg, label="avg", color="#1f77b4", linewidth=2)
+    ax.plot(xs, st.gen_worst, label="worst", color="#d62728", linewidth=2)
+    ax.set_xlabel("Pokolenie")
+    ax.set_ylabel("Uratowany koszt")
+    ax.set_title(f"{strategy} – {report.instance.name} (run best avg)")
+    ax.legend(title="Statystyka")
+    ax.grid(True, alpha=0.3)
+    fig.tight_layout()
+    path = out_dir / f"{report.instance.name}_{strategy}_curves.png"
     fig.savefig(path, dpi=130)
     plt.close(fig)
     return path
@@ -71,7 +96,7 @@ def plot_final_bars(report: InstanceReport, out_dir: Path) -> Path:
         ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(),
                 f"{val:.0f}", ha="center", va="bottom", fontsize=9)
 
-    ax.set_ylabel("Sredni uratowany koszt (best z runu)")
+    ax.set_ylabel("Uratowany koszt")
     ax.set_title(f"Jakosc koncowa – {report.instance.name}\n(linia przerywana = heurystyka zachlanna bez GA)")
     ax.grid(True, axis="y", alpha=0.3)
     fig.tight_layout()
@@ -93,7 +118,7 @@ def plot_boxplot(report: InstanceReport, out_dir: Path) -> Path:
     for patch, s in zip(bp["boxes"], strategies):
         patch.set_facecolor(_color(s))
         patch.set_alpha(0.6)
-    ax.set_ylabel("Najlepszy uratowany koszt (per run)")
+    ax.set_ylabel("Uratowany koszt (best, per run)")
     ax.set_title(f"Rozklad wynikow z powtorzen – {report.instance.name}")
     ax.grid(True, axis="y", alpha=0.3)
     fig.tight_layout()
@@ -149,6 +174,8 @@ def generate_all_plots(reports: list[InstanceReport], out_root: Path) -> list[Pa
         paths.append(plot_convergence(rep, inst_dir))
         paths.append(plot_final_bars(rep, inst_dir))
         paths.append(plot_boxplot(rep, inst_dir))
+        for strat in rep.stats:
+            paths.append(plot_strategy_curves(rep, strat, inst_dir))
     overall = plot_overall_improvement(reports, out_root)
     if overall is not None:
         paths.append(overall)

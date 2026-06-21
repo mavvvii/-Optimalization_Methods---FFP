@@ -14,6 +14,7 @@ Heurystyki NIE zuzywaja dodatkowych ewaluacji – to gwarantuje rowny budzet.
 from __future__ import annotations
 
 import random
+import statistics
 from dataclasses import dataclass
 
 from . import operators as ops
@@ -51,6 +52,7 @@ class GAResult:
     gen_best: list[float]                  # najlepsza ocena w kazdym pokoleniu
     gen_avg: list[float]                   # srednia ocena w kazdym pokoleniu
     gen_worst: list[float]                 # najgorsza ocena w kazdym pokoleniu
+    gen_std: list[float]                   # odchylenie std oceny w kazdym pokoleniu
 
 
 class GeneticAlgorithm:
@@ -105,6 +107,7 @@ class GeneticAlgorithm:
         gen_best: list[float] = []
         gen_avg: list[float] = []
         gen_worst: list[float] = []
+        gen_std: list[float] = []
 
         for _ in range(cfg.generations):
             scored: list[ops.Scored] = []
@@ -116,6 +119,7 @@ class GeneticAlgorithm:
             gen_best.append(max(fits))
             gen_avg.append(sum(fits) / len(fits))
             gen_worst.append(min(fits))
+            gen_std.append(statistics.pstdev(fits) if len(fits) > 1 else 0.0)
 
             gen_top_fit, gen_top_perm = max(scored, key=lambda e: e[0])
             if gen_top_fit > best_cost:
@@ -147,4 +151,5 @@ class GeneticAlgorithm:
             gen_best=gen_best,
             gen_avg=gen_avg,
             gen_worst=gen_worst,
+            gen_std=gen_std,
         )

@@ -1,15 +1,17 @@
 """Orkiestracja eksperymentu FFP.
 
 Dla kazdej instancji uruchamia czysty GA oraz warianty z usprawnieniami,
-po `runs` niezaleznych powtorzen kazdy. Pilnuje, by WSZYSTKIE warianty mialy
-identyczny budzet ewaluacji, liczy statystyki (best/worst/avg/std) i zapisuje
+po `runs` niezaleznych powtorzen kazdy. Z tych powtorzen wybierany jest
+run zwyciezca - ten z najlepszym (najwyzszym) avg koncowej populacji, a nie
+ten z pojedynczym najlepszym wynikiem (ktory moze byc szczesliwym wystrzalem).
+To jego best/avg/worst/std i krzywe zbieznosci sa raportowane i wykreslane.
+Pilnuje, by WSZYSTKIE warianty mialy identyczny budzet ewaluacji, i zapisuje
 wyniki do plikow CSV.
 """
 
 from __future__ import annotations
 
 import csv
-import statistics
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -28,42 +30,40 @@ class StrategyStats:
     std: float
     budget: int
     evaluations_per_run: int
-    # Usrednione po powtorzeniach krzywe zbieznosci.
+    # Krzywe zbieznosci PRZEGRYWAJACEGO runu (tego z najlepszym avg), nie usrednione po runach.
     gen_best: list[float]
     gen_avg: list[float]
     gen_worst: list[float]
     final_bests: list[float]   # najlepszy wynik kazdego powtorzenia (do boxplotu)
 
 
-def _average_curves(results: list[GAResult]) -> tuple[list[float], list[float], list[float]]:
-    g = len(results[0].gen_best)
-    avg_best = [statistics.mean(r.gen_best[i] for r in results) for i in range(g)]
-    avg_avg = [statistics.mean(r.gen_avg[i] for r in results) for i in range(g)]
-    avg_worst = [statistics.mean(r.gen_worst[i] for r in results) for i in range(g)]
-    return avg_best, avg_avg, avg_worst
-
-
 def run_strategy(instance: FFPInstance, config: GAConfig, strategy: str, runs: int, base_seed: int) -> StrategyStats:
+    print(f"  {strategy}:")
     results: list[GAResult] = []
     for i in range(runs):
         ga = GeneticAlgorithm(instance, config, strategy, seed=base_seed + i)
-        results.append(ga.run())
+        result = ga.run()
+        results.append(result)
+        print(f"    run {i + 1:2d}/{runs}: best={result.best_cost:9.1f}  "
+              f"avg={result.gen_avg[-1]:9.1f}  worst={result.gen_worst[-1]:9.1f}")
 
+    # Wygrywa run z najlepszym (najwyzszym) avg koncowej populacji - nie ten z
+    # pojedynczym najlepszym wynikiem, ktory moglby byc szczesliwym wystrzalem.
+    winner = max(results, key=lambda r: r.gen_avg[-1])
     finals = [r.best_cost for r in results]
-    avg_best, avg_avg, avg_worst = _average_curves(results)
     evals = results[0].evaluations_used
 
     return StrategyStats(
         strategy=strategy,
-        best=max(finals),
-        worst=min(finals),
-        avg=statistics.mean(finals),
-        std=statistics.pstdev(finals) if len(finals) > 1 else 0.0,
+        best=winner.best_cost,
+        worst=winner.gen_worst[-1],
+        avg=winner.gen_avg[-1],
+        std=winner.gen_std[-1],
         budget=config.budget,
         evaluations_per_run=evals,
-        gen_best=avg_best,
-        gen_avg=avg_avg,
-        gen_worst=avg_worst,
+        gen_best=winner.gen_best,
+        gen_avg=winner.gen_avg,
+        gen_worst=winner.gen_worst,
         final_bests=finals,
     )
 
@@ -110,6 +110,12 @@ def run_instance(
     for strat in strategies:
         s = run_strategy(instance, config, strat, runs, base_seed)
         stats[strat] = s
+        print(f"    {strat:9s}: best={s.best:9.1f}  avg={s.avg:9.1f}  "
+              f"worst={s.worst:9.1f}  std={s.std:7.2f}  evals/run={s.evaluations_per_run}")
+
+    print(f"\n{'='*70}")
+    for strat in strategies:
+        s = stats[strat]
         print(f"  {strat:9s}: best={s.best:9.1f}  avg={s.avg:9.1f}  "
               f"worst={s.worst:9.1f}  std={s.std:7.2f}  evals/run={s.evaluations_per_run}")
 
@@ -135,7 +141,7 @@ def run_instance(
 #  Zapis CSV
 # --------------------------------------------------------------------------- #
 def write_convergence_csv(report: InstanceReport, out_dir: Path) -> Path:
-    """Krzywe zbieznosci (usrednione po powtorzeniach) – jeden plik na instancje."""
+    """Krzywe zbieznosci runu zwyciezcy (najlepszy avg) – jeden plik na instancje."""
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"{report.instance.name}_convergence.csv"
     strategies = list(report.stats.keys())
