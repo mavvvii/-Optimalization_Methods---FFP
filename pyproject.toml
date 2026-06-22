@@ -3,7 +3,7 @@ name = "ffp-genetic"
 version = "0.1.0"
 description = "Algorytm genetyczny dla problemu strazackiego (Firefighter Problem) z trzema usprawnieniami."
 authors = [
-    {name = "Autorzy projektu", email = "you@example.com"}
+    {name = "Hubert Kwiatek", email = "273197@student.pwr.edu.pl"}
 ]
 readme = "README.md"
 requires-python = ">=3.11"

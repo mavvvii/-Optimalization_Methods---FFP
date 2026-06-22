@@ -1,6 +1,5 @@
-"""Uproszczony punkt wejscia: `python run.py` (lub `poetry run python run.py`).
-
-Dziala takze bez `poetry install` - dodaje katalog src/ do sciezki importow.
+"""
+Main entry point for the FFP optimization methods project.
 """
 
 from __future__ import annotations
