@@ -18,7 +18,6 @@ from __future__ import annotations
 
 from .instance import FFPInstance
 
-# Nazwy strategii uzywane w configu i w wynikach.
 BASELINE = "baseline"
 COST = "cost"
 DEGREE = "degree"
@@ -42,22 +41,18 @@ def priority_order(instance: FFPInstance, strategy: str, hybrid_weights: tuple[f
     nodes = list(range(n))
 
     if strategy == COST:
-        # Najdrozsze wezly najpierw -> maksymalizujemy uratowany koszt.
         return sorted(nodes, key=lambda i: -instance.costs[i])
 
     if strategy == DEGREE:
-        # Huby najpierw -> odciecie wezlow o duzej liczbie polaczen ogranicza pozar.
         return sorted(nodes, key=lambda i: (-instance.degree[i], -instance.costs[i]))
 
     if strategy == DIJKSTRA:
-        # Najblizej ognia najpierw (front pozaru); remis rozstrzyga wyzszy stopien.
         return sorted(nodes, key=lambda i: (instance.distance_from_fire[i], -instance.degree[i]))
 
     if strategy == HYBRID:
         w_cost, w_deg, w_dist = hybrid_weights
         cost_n = _normalize([instance.costs[i] for i in nodes])
         deg_n = _normalize([float(instance.degree[i]) for i in nodes])
-        # Blizej ognia = lepiej, wiec uzywamy 1/(1+dist) i normalizujemy.
         close_n = _normalize([1.0 / (1.0 + instance.distance_from_fire[i]) for i in nodes])
         score = [w_cost * cost_n[i] + w_deg * deg_n[i] + w_dist * close_n[i] for i in nodes]
         return sorted(nodes, key=lambda i: -score[i])

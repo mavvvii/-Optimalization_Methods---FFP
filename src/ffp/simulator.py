@@ -21,11 +21,11 @@ from .instance import FFPInstance
 
 @dataclass(frozen=True)
 class SimulationResult:
-    saved_cost: float          # suma kosztow uratowanych wezlow  (FUNKCJA CELU)
-    saved_nodes: int           # liczba uratowanych wezlow
-    burned_nodes: int          # liczba spalonych wezlow
-    protected_order: tuple[int, ...]   # wezly faktycznie ochronione (w kolejnosci)
-    burned_set: frozenset[int]         # wezly spalone (start pozaru + rozprzestrzenienie)
+    saved_cost: float
+    saved_nodes: int
+    burned_nodes: int
+    protected_order: tuple[int, ...]
+    burned_set: frozenset[int]
 
 
 def simulate(instance: FFPInstance, priority: list[int], num_firefighters: int) -> SimulationResult:
@@ -39,12 +39,11 @@ def simulate(instance: FFPInstance, priority: list[int], num_firefighters: int) 
     for s in instance.start_nodes:
         burning[s] = True
 
-    fire_front = list(instance.start_nodes)   # wezly, ktore moga jeszcze szerzyc ogien
+    fire_front = list(instance.start_nodes)
     protected_seq: list[int] = []
     ptr = 0
 
     while fire_front:
-        # --- krok 1: rozmieszczenie strazakow ---
         placed = 0
         while placed < num_firefighters and ptr < len(priority):
             node = priority[ptr]
@@ -54,7 +53,6 @@ def simulate(instance: FFPInstance, priority: list[int], num_firefighters: int) 
                 protected_seq.append(node)
                 placed += 1
 
-        # --- krok 2: rozprzestrzenienie pozaru ---
         newly_burning: list[int] = []
         for u in fire_front:
             for v in adjacency[u]:

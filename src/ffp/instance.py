@@ -23,7 +23,6 @@ from collections import deque
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# Liczba zmiennoprzecinkowa lub calkowita (obsluga notacji naukowej).
 _NUMBER = re.compile(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?")
 
 
@@ -42,12 +41,11 @@ class FFPInstance:
 
     name: str
     num_nodes: int
-    costs: tuple[float, ...]                      # koszt (wartosc) kazdego wezla
-    adjacency: tuple[frozenset[int], ...]         # lista sasiedztwa
-    start_nodes: tuple[int, ...]                  # wezly, w ktorych zaczyna sie pozar
-    edges: tuple[tuple[int, int], ...]            # surowa lista krawedzi (do podgladu)
+    costs: tuple[float, ...]
+    adjacency: tuple[frozenset[int], ...]
+    start_nodes: tuple[int, ...]
+    edges: tuple[tuple[int, int], ...]
 
-    # Pola wyliczane (cache) – przydatne dla heurystyk.
     degree: tuple[int, ...] = field(default=())
     distance_from_fire: tuple[int, ...] = field(default=())
 
@@ -89,8 +87,6 @@ def find_instance_files(root: Path, n_obj: int, size: int, idx: int) -> tuple[Pa
             f"zawierajacy podkatalogi '2-obj/' i '3-obj/'."
         )
 
-    # Zerowe dopelnienie rozni sie miedzy 2-obj (4 cyfry) a 3-obj (6 cyfr) –
-    # probujemy obu wariantow przez glob.
     size_globs = [f"{size:04d}", f"{size:06d}", str(size)]
     idx_globs = [f"{idx:02d}", f"{idx:03d}", str(idx)]
 
@@ -113,12 +109,10 @@ def load_instance(root: Path, n_obj: int, size: int, idx: int) -> FFPInstance:
     """Wczytuje instancje FFP i wstepnie wylicza stopnie wezlow oraz odleglosci."""
     costs_path, edges_path, starts_path = find_instance_files(root, n_obj, size, idx)
 
-    # --- koszty (bierzemy tylko pierwsza kolumne) ---
     cost_rows = _read_numeric_rows(costs_path)
     costs = [float(r[0]) for r in cost_rows]
     n = len(costs)
 
-    # --- krawedzie ---
     edge_rows = _read_numeric_rows(edges_path)
     edges = [(int(float(a)), int(float(b))) for a, b in edge_rows]
 
@@ -129,7 +123,6 @@ def load_instance(root: Path, n_obj: int, size: int, idx: int) -> FFPInstance:
         adjacency[a].add(b)
         adjacency[b].add(a)
 
-    # --- punkty startowe ---
     start_tokens = _NUMBER.findall(starts_path.read_text(encoding="utf-8"))
     start_nodes = [int(float(t)) for t in start_tokens]
     if not start_nodes:

@@ -12,12 +12,9 @@ from __future__ import annotations
 
 import random
 
-Scored = tuple[float, list[int]]   # (fitness, permutacja)
+Scored = tuple[float, list[int]]
 
 
-# --------------------------------------------------------------------------- #
-#  Krzyzowanie
-# --------------------------------------------------------------------------- #
 def order_crossover(p1: list[int], p2: list[int], rng: random.Random) -> list[int]:
     """OX – zachowuje fragment jednego rodzica, reszte uzupelnia z drugiego."""
     n = len(p1)
@@ -60,13 +57,9 @@ def apply_crossover(mode: str, p1: list[int], p2: list[int], rng: random.Random)
         return order_crossover(p1, p2, rng)
     if mode == "pmx":
         return pmx_crossover(p1, p2, rng)
-    # "both" – losowo za kazdym razem
     return order_crossover(p1, p2, rng) if rng.random() < 0.5 else pmx_crossover(p1, p2, rng)
 
 
-# --------------------------------------------------------------------------- #
-#  Mutacja
-# --------------------------------------------------------------------------- #
 def swap_mutation(perm: list[int], i: int, j: int) -> list[int]:
     out = perm.copy()
     out[i], out[j] = out[j], out[i]
@@ -89,9 +82,8 @@ def guided_mutation(perm: list[int], priority_rank: dict[int, int], rng: random.
     n = len(perm)
     if n < 3:
         return perm.copy()
-    # Kandydat: wezel, dla ktorego (pozycja w permutacji) >> (ranga heurystyki).
     best_node, best_gap, best_pos = None, -1, 0
-    sample = rng.sample(range(n), k=min(8, n))   # tani podglad kilku pozycji
+    sample = rng.sample(range(n), k=min(8, n))
     for pos in sample:
         node = perm[pos]
         gap = pos - priority_rank.get(node, pos)
@@ -118,7 +110,6 @@ def apply_mutation(
     n = len(perm)
     if n < 2:
         return perm.copy()
-    # Mutacja kierowana tylko dla wariantow z heurystyka.
     if priority_rank is not None and rng.random() < guided_prob:
         return guided_mutation(perm, priority_rank, rng)
     i, j = sorted(rng.sample(range(n), k=2))
@@ -129,9 +120,6 @@ def apply_mutation(
     return swap_mutation(perm, i, j) if rng.random() < 0.5 else inversion_mutation(perm, i, j)
 
 
-# --------------------------------------------------------------------------- #
-#  Selekcja (MAKSYMALIZACJA – wieksza ocena = lepiej)
-# --------------------------------------------------------------------------- #
 def tournament(scored: list[Scored], size: int, rng: random.Random) -> list[int]:
     pool = rng.sample(scored, k=min(size, len(scored)))
     pool.sort(key=lambda e: e[0], reverse=True)
@@ -139,7 +127,6 @@ def tournament(scored: list[Scored], size: int, rng: random.Random) -> list[int]
 
 
 def roulette(scored: list[Scored], rng: random.Random) -> list[int]:
-    # Przesuwamy oceny tak, by byly dodatnie, i wazymy proporcjonalnie.
     fitness = [s for s, _ in scored]
     lo = min(fitness)
     weights = [(f - lo) + 1e-6 for f in fitness]

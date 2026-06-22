@@ -31,12 +31,12 @@ class GAConfig:
     mutation_prob: float = 0.2
     tournament_size: int = 5
     elite_size: int = 2
-    crossover: str = "ordered"          # ordered | pmx | both
-    mutation: str = "swap"              # swap | inversion | both
+    crossover: str = "ordered"
+    mutation: str = "swap"
     num_firefighters: int = 2
-    seed_fraction: float = 0.25         # jaka czesc populacji zasiac heurystyka
-    guided_mutation_prob: float = 0.5   # p. mutacji kierowanej (tylko warianty z heur.)
-    hybrid_weights: tuple[float, float, float] = (1.0, 1.0, 1.0)  # cost, degree, dist
+    seed_fraction: float = 0.25
+    guided_mutation_prob: float = 0.5
+    hybrid_weights: tuple[float, float, float] = (1.0, 1.0, 1.0)
 
     @property
     def budget(self) -> int:
@@ -46,13 +46,13 @@ class GAConfig:
 @dataclass
 class GAResult:
     strategy: str
-    best_cost: float                       # najlepszy uratowany koszt (cel)
+    best_cost: float
     best_permutation: list[int]
-    evaluations_used: int                  # rzeczywista liczba ewaluacji (kontrola budzetu)
-    gen_best: list[float]                  # najlepsza ocena w kazdym pokoleniu
-    gen_avg: list[float]                   # srednia ocena w kazdym pokoleniu
-    gen_worst: list[float]                 # najgorsza ocena w kazdym pokoleniu
-    gen_std: list[float]                   # odchylenie std oceny w kazdym pokoleniu
+    evaluations_used: int
+    gen_best: list[float]
+    gen_avg: list[float]
+    gen_worst: list[float]
+    gen_std: list[float]
 
 
 class GeneticAlgorithm:
@@ -63,7 +63,6 @@ class GeneticAlgorithm:
         self._rng = random.Random(seed)
         self._evaluations = 0
 
-        # Porzadek heurystyczny + rangi (pozycja wezla w tym porzadku).
         if strategy == BASELINE:
             self._priority: list[int] | None = None
             self._priority_rank: dict[int, int] | None = None
@@ -71,7 +70,6 @@ class GeneticAlgorithm:
             self._priority = priority_order(instance, strategy, config.hybrid_weights)
             self._priority_rank = {node: pos for pos, node in enumerate(self._priority)}
 
-    # --- ocena = symulacja pozaru (jedyne miejsce zliczajace budzet) ---
     def _evaluate(self, perm: list[int]) -> float:
         self._evaluations += 1
         return simulate(self._inst, perm, self._cfg.num_firefighters).saved_cost
@@ -91,8 +89,8 @@ class GeneticAlgorithm:
         pop: list[list[int]] = []
         if self._priority is not None:
             n_seed = max(1, int(self._cfg.seed_fraction * self._cfg.pop_size))
-            pop.append(self._priority.copy())                 # czysta heurystyka
-            for _ in range(n_seed - 1):                       # lekko zaburzone kopie
+            pop.append(self._priority.copy())
+            for _ in range(n_seed - 1):
                 pop.append(self._perturb(self._priority, swaps=max(1, self._inst.num_nodes // 20)))
         while len(pop) < self._cfg.pop_size:
             pop.append(self._random_perm())
@@ -126,7 +124,6 @@ class GeneticAlgorithm:
                 best_cost = gen_top_fit
                 best_perm = gen_top_perm.copy()
 
-            # --- nowa populacja: elita + potomstwo ---
             next_pop = ops.elitism(scored, cfg.elite_size)
             while len(next_pop) < cfg.pop_size:
                 parent1 = ops.tournament(scored, cfg.tournament_size, self._rng)

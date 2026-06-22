@@ -31,7 +31,6 @@ def main(argv: list[str] | None = None) -> None:
 
     cfg = load_config(args.config)
 
-    # Katalog wynikow ze znacznikiem czasu (jak w projekcie PFSP).
     stamp = datetime.now().strftime("run_%Y%m%d_%H%M%S")
     out_root = cfg.results_dir / stamp
     out_root.mkdir(parents=True, exist_ok=True)

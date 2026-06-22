@@ -17,7 +17,7 @@ from pathlib import Path
 
 import matplotlib
 
-matplotlib.use("Agg")  # backend bez GUI – zapis do plikow
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from .experiment import InstanceReport
@@ -85,7 +85,6 @@ def plot_final_bars(report: InstanceReport, out_dir: Path) -> Path:
     fig, ax = plt.subplots(figsize=(8, 5))
     bars = ax.bar(strategies, avgs, yerr=stds, capsize=5, color=colors, alpha=0.85)
 
-    # Linie odniesienia – heurystyki zachlanne (bez GA).
     for s in strategies:
         ref = report.greedy_reference.get(s)
         if ref is not None:

@@ -30,12 +30,11 @@ class StrategyStats:
     std: float
     budget: int
     evaluations_per_run: int
-    # Krzywe zbieznosci PRZEGRYWAJACEGO runu (tego z najlepszym avg), nie usrednione po runach.
     gen_best: list[float]
     gen_avg: list[float]
     gen_worst: list[float]
-    final_bests: list[float]   # najlepszy wynik kazdego powtorzenia (do boxplotu)
-    best_permutation: list[int]   # permutacja runu zwyciezcy (best avg)
+    final_bests: list[float]
+    best_permutation: list[int]
 
 
 def _format_permutation(perm: list[int], start_nodes: set[int], burned_nodes: set[int]) -> str:
@@ -62,8 +61,6 @@ def run_strategy(instance: FFPInstance, config: GAConfig, strategy: str, runs: i
         print(f"    run {i + 1:2d}/{runs}: best={result.best_cost:9.1f}  "
               f"avg={result.gen_avg[-1]:9.1f}  worst={result.gen_worst[-1]:9.1f}")
 
-    # Wygrywa run z najlepszym (najwyzszym) avg koncowej populacji - nie ten z
-    # pojedynczym najlepszym wynikiem, ktory moglby byc szczesliwym wystrzalem.
     winner = max(results, key=lambda r: r.gen_avg[-1])
     finals = [r.best_cost for r in results]
     evals = results[0].evaluations_used
@@ -139,7 +136,6 @@ def run_instance(
               f"worst={s.worst:9.1f}  std={s.std:7.2f}  evals/run={s.evaluations_per_run}")
         print(_format_permutation(s.best_permutation, start_nodes, burned_nodes))
 
-    # --- KONTROLA BUDZETU: wszystkie warianty musza miec identyczny budzet ---
     budgets = {strat: s.evaluations_per_run for strat, s in stats.items()}
     unique = set(budgets.values())
     if len(unique) != 1:
@@ -157,9 +153,6 @@ def run_instance(
     return InstanceReport(instance=instance, stats=stats, greedy_reference=greedy)
 
 
-# --------------------------------------------------------------------------- #
-#  Zapis CSV
-# --------------------------------------------------------------------------- #
 def write_convergence_csv(report: InstanceReport, out_dir: Path) -> Path:
     """Krzywe zbieznosci runu zwyciezcy (najlepszy avg) – jeden plik na instancje."""
     out_dir.mkdir(parents=True, exist_ok=True)
